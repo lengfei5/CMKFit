@@ -23,14 +23,11 @@ and finally inferring mRNA kineitc parameters, e.g. half-life, rhythmic amplitud
     graphics,
     stats,
     utils
-
 ```
-
 #### Cloning the git repository
 ```
 cd dir_to_place_repository
 git clone https://github.com/lengfei5/mRNA_degradation_kinetics_fitting
-
 ```
 
 #### Installing the R package
@@ -38,24 +35,18 @@ git clone https://github.com/lengfei5/mRNA_degradation_kinetics_fitting
 install.packages("devtools")
 library(devtools)
 install_github("lengfei5/CKMFit")
-
 ```
 
 ## Getting Started
 ```{r}
-######################################
 rm(list=ls())
 
-####################
 ## import data example and create an object
 ## prepare the table, geneNames, geneLengths, sizeFactors, dispersion estiamtion and variance estimation 
-####################
 dataDir = "data/"
 load(file = paste0(dataDir, "fitting_degradation_all_data_example_readCount_rpkm.Rdata"))
 
 TEST.readCount.NB = FALSE
-
-source("R/preprocess_prepare_for_fitting.R")
 
 if(TEST.readCount.NB){
   # zt = seq(0,94,by = 2)
@@ -104,30 +95,6 @@ res.fit = make.fits.with.all.models.for.one.gene.remove.outliers(mds, gene.index
                                                                             identifiablity.analysis.gamma = identifiablity.analysis.gamma);
 cat("------------- time required ---------------\n")
 proc.time() - ptm
-
-###########################
-## compare with origine function
-###########################
-load(file = paste0(dataDir, "fitting_results_for_examples_2compare_with_new_functions.Rdata"))
-keep2compare[which(keep2compare$gene == gg), ]
-
-rm(list = lsf.str())
-source('origin/functions_origin.R')
-ptm <- proc.time()
-param.fits.results.v0 = make.fits.with.all.models.for.one.gene.remove.outliers(T = T, gene.index = gene.index, debug = TRUE,
-                                                                            zt = zt, i.ex = ZT.ex, i.int = ZT.int, outliers = outliers.removal,
-                                                                            Identifiablity.Analysis.by.Profile.Likelihood.gamma 
-                                                                            = Identifiablity.Analysis);
-proc.time() - ptm
-
-index = match(c('outlier.m', 'outlier.s'), names(param.fits.results))
-res.fit = as.numeric(param.fits.results[-index])
-names(res.fit) = names(param.fits.results)[-index]
-
-Check.dispersion.parameters = FALSE
-if(Check.dispersion.parameters){
-  load(file = "archives/fitting_degradation_all_data_example_readCount.Rdata")
-}
 
 ```
 
