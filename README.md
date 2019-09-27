@@ -104,42 +104,6 @@ proc.time() - ptm
 
 - [ ] Connect the general parameter boundaries (modifiable by used) and gene-specific boundaries (refine the boundaries by the gene data) 
 
-## Initial Roadmap suggestion
-1. Code cleanup by @jiwang. Working code that is possible to understand and that produces correct results on existing data.
-2. Code explanation by @jiwang, just an outline of the main computational steps.
-3. Code review by @Pål Westermark, I will try my best to understand the code. I will then do the tidyverse style conversion, as far as this is possible. This will facilitate future code publication/package creation.
-4. Formal specification of Gaussian mode, presumably by @felix, everyone decides where this goes into the existing code. Here, @jiwang might if necessary do small modifications so that this is a simple matter
-5. Package creation – @Pål Westermark could create a skeleton
-6. Package completion – @Laura @felix @jiwang @Pål Westermark this includes
-  - documentation
-  - vignette
-  - unit tests
-  - inclusion of data sets
-allocation of tasks to persons to be determined ...
-
-
-### Script showing usage
-#### run_modelFitting_forAll.R
-**The script mainly show the usage of the package**
-
-- install required R packages in case they are absent
-  - `R/configure.R`
-
-- Important data table, time points, pre-mRNA and mRNA lengths...  
-
-- Estimate scaling factors for each sample (e.g. 48 samples in our case), 
-  dispersion parameter for each time point (e.g. 12 time points in our case) and store all those parameters in a so-called 
-  MDfitDataSet object (S3 class)
-  
-  `MDfitDataSet(P, M, length.P, length.M, zt, fitType.dispersion = "local")`    
-
-- Run the main function after specifying the parameters
-  
-  `make.fits.with.all.models.for.one.gene.remove.outliers(mds, gene.index, debug, outliers.removal, identifiablity.analysis.gamma)`  
-  in `R/fitting_degradation_do_stepbystep.R`  
-    
-- Compare the output with the origin code
-
 
 ### Data processing function
 #### MDfitDataSet(P, M, length.P, length.M, zt, fitType.dispersion = "local")
