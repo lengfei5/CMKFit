@@ -16,18 +16,17 @@ Imports:
     deSolve,
     fdrtool,
     circular, 
-    preprocessCore, 
-    gtools, 
-    biomaRt, 
-    numDeriv, 
+    preprocessCore,
+    gtools,
+    biomaRt,
+    numDeriv,
     Matrix,
     graphics,
     stats,
     utils
 Suggests:
     devtools,
-    roxygen2,
-    testthat
+    roxygen2
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
