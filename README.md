@@ -9,20 +9,8 @@ and finally inferring mRNA kineitc parameters, e.g. half-life, rhythmic amplitud
 * R 3.4.1 (currently tested by JW), >= R 3.0.0 should work as well (but to check) 
 
 ```
-    DESeq2,
-    limma,
-    emdbook,
-    deSolve,
-    fdrtool,
-    circular, 
-    preprocessCore, 
-    gtools, 
-    biomaRt, 
-    numDeriv, 
-    Matrix,
-    graphics,
-    stats,
-    utils
+DESeq2, limma, emdbook, deSolve, fdrtool, circular, preprocessCore, 
+gtools, biomaRt, numDeriv, Matrix, graphics, stats, utils
 ```
 #### Cloning the git repository
 ```
