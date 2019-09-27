@@ -46,32 +46,21 @@ rm(list=ls())
 dataDir = "data/"
 load(file = paste0(dataDir, "fitting_degradation_all_data_example_readCount_rpkm.Rdata"))
 
+zt = seq(0,94,by = 2)
+ZT.int = grep('.count.premRNA', colnames(T))
+ZT.ex = grep('.count.mRNA', colnames(T))
+length.int = which(colnames(T) == "length.premRNA")
+length.ex = which(colnames(T) == "length.mRNA")
+
+## creat a MDfitDataSet object (a S3 class)
 TEST.readCount.NB = FALSE
 
 if(TEST.readCount.NB){
-  # zt = seq(0,94,by = 2)
-  #ZT.int = grep('.count.premRNA', colnames(T))
-  #ZT.ex = grep('.count.mRNA', colnames(T))
-  #length.int = which(colnames(T) == "length.premRNA")
-  #length.ex = which(colnames(T) == "length.mRNA")
-  
-  ####################
-  ## creat a MDfitDataSet object (a S3 class)
-  ####################
-  #mds = MDfitDataSet(P = T[, ZT.int], M = T[, ZT.ex], length.P = T[, length.int], length.M = T[, length.ex], zt=zt,
-  #                   mode = "NB", fitType.dispersion = "local")
-  #save(mds, file = "data/MDfitDataSet_example.Rdata")
-  load(file = "data/MDfitDataSet_example.Rdata")
-  
+  mds = MDfitDataSet(P = T[, ZT.int], M = T[, ZT.ex], length.P = T[, length.int], length.M = T[, length.ex], zt=zt,
+                     mode = "NB", fitType.dispersion = "local")
 }else{
-  #zt = seq(0,94,by = 2)
-  #ZT.int = intersect(grep('.rpkm.premRNA', colnames(T)), grep("ZT", colnames(T)))
-  #ZT.ex = intersect(grep('.rpkm.mRNA', colnames(T)), grep("ZT", colnames(T)))
-  #mds = MDfitDataSet(P = T[, ZT.int], M = T[, ZT.ex], zt=zt, mode = "logNormal", fitType.var = "pool")
-  #save(mds, file = "data/MDfitDataSet_example_logNormal_varEst.poolPM.Rdata")
+  mds = MDfitDataSet(P = T[, ZT.int], M = T[, ZT.ex], zt=zt, mode = "logNormal", fitType.var = "pool")
   
-  load(file = "data/MDfitDataSet_example_logNormal_varEst.poolPM.Rdata")
-  #load(file = "data/MDfitDataSet_example_logNormal.Rdata")
 }
 
 ####################
@@ -84,10 +73,7 @@ identifiablity.analysis.gamma = TRUE
 gg = "Per3"
 gene.index = which(T$gene==gg)
 
-####################
 ## test the current functions 
-####################
-source("R/fitting_degradation_do_stepbystep.R")
 
 ptm <- proc.time()
 res.fit = make.fits.with.all.models.for.one.gene.remove.outliers(mds, gene.index = gene.index, debug = debug,
@@ -95,12 +81,9 @@ res.fit = make.fits.with.all.models.for.one.gene.remove.outliers(mds, gene.index
                                                                             identifiablity.analysis.gamma = identifiablity.analysis.gamma);
 cat("------------- time required ---------------\n")
 proc.time() - ptm
-
 ```
 
-## TO-DO
-Here is the reminder for the improvement:
-
+## Improvements
 - [x] Since we are also planning to add the option for "Gaussian noise", we should think how to design the fucntions in such way
   that they can be easily to be adapted to do it. 
   And also keep in mind that JW has done it, at least partially, 
@@ -119,6 +102,7 @@ Here is the reminder for the improvement:
         implemented. 
         (Give up) consider to use bbmle package in R instead of optim, or at least for profile-likelihood, which could be much faster and more convenient to use. 
 
+## TO-Do list
 - [ ] Now the code is designed just for fitting one gene. 
   Ideally the code can easily fit all genes in the data in parallel.
   Thus the parallization should be taken into consideration now. 
@@ -138,7 +122,7 @@ Here is the reminder for the improvement:
 
 - [ ] Connect the general parameter boundaries (modifiable by used) and gene-specific boundaries (refine the boundaries by the gene data) 
 
-## Roadmap suggestion
+## Initial Roadmap suggestion
 1. Code cleanup by @jiwang. Working code that is possible to understand and that produces correct results on existing data.
 2. Code explanation by @jiwang, just an outline of the main computational steps.
 3. Code review by @Pål Westermark, I will try my best to understand the code. I will then do the tidyverse style conversion, as far as this is possible. This will facilitate future code publication/package creation.
@@ -151,16 +135,6 @@ Here is the reminder for the improvement:
   - inclusion of data sets
 allocation of tasks to persons to be determined ...
 
-
-## Directory structure
-* **[run_modelFitting_forAll.R]** -- the script showing how to run the main function and to specify the parameters
-* **data/** -- data example (the read count table used in the PNAS paper) 
-* **R/** -- scripts for the main function
-* **src/** -- C++ code
-* **origin/** -- origin scripts based on which we implement this pacakge and also the scripts used for the PNAS paper (before cleaning)
-
-## Code structure
-Here is the structure of inital codes:
 
 ### Script showing usage
 #### run_modelFitting_forAll.R
@@ -198,7 +172,6 @@ in `R/preprocess_prepare_for_fitting.R`
 - `calculate.scaling.factors.DESeq2()` -- size factor * constant close to libary size (here is arbitrarily defined, just a constant) 
 
 - `calculate.dispersions.for.each.time.point.DESeq2()` -- dispersion estiamtion for each time point
-
 
 ### Main function 
 #### make.fits.with.all.models.for.one.gene.remove.outliers(mds, gene.index, debug, outliers.removal, identifiablity.analysis.gamma)
