@@ -5,9 +5,43 @@ dissecting the contributions of rhythmic transcription and mRNA degradation
 and finally inferring mRNA kineitc parameters, e.g. half-life, rhythmic amplitude and phase of rhythmic degradation.
 
 ## Installation
+#### Prerequisites
+* R 3.4.1 (currently tested by JW), >= R 3.0.0 should work as well (but to check) 
 
-## Example
+```
+    DESeq2,
+    limma,
+    emdbook,
+    deSolve,
+    fdrtool,
+    circular, 
+    preprocessCore, 
+    gtools, 
+    biomaRt, 
+    numDeriv, 
+    Matrix,
+    graphics,
+    stats,
+    utils
 
+```
+
+#### Cloning the git repository
+```
+cd dir_to_place_repository
+git clone https://github.com/lengfei5/mRNA_degradation_kinetics_fitting
+
+```
+
+#### Installing the R package
+```
+install.packages("devtools")
+library(devtools)
+install_github("lengfei5/CKMFit")
+
+```
+
+## Getting Started
 ```{r}
 ######################################
 rm(list=ls())
@@ -288,55 +322,3 @@ in `R/fitting_degradation_do_stepbystep.R`
     - `transform.parameter.combinations()` -- convert the parameter combinations 
     - `parameter.cleaning()` -- filter and clean the estimated parameter and also test parameter if identifiable 
     
-
-## Installation
-#### Prerequisites
-* R 3.4.1 (currently tested by JW), >= R 3.0.0 should work as well (but to check) 
-
-```
-library(emdbook)
-library(deSolve)
-library(fdrtool)
-library(circular)
-library(preprocessCore)
-library(gtools)
-library(biomaRt)
-library(numDeriv)
-library(Matrix)
-library(DESeq2)
-library(voom)
-
-```
-
-#### Cloning the git repository
-```
-cd dir_to_place_repository
-git clone https://github.com/lengfei5/mRNA_degradation_kinetics_fitting
-
-```
-
-#### Installing the R package
-A step by step series of examples that tell you how to get a development env running
-Say what the step will be
-```
-Give the example
-```
-
-## Getting Started
- 
-Running the test for one gene (see [run_modelFitting_for_all.R](#run_modelFitting_for_all.R))
-
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
