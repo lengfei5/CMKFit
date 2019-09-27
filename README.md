@@ -41,8 +41,7 @@ install_github("lengfei5/CKMFit")
 ```{r}
 rm(list=ls())
 
-## import data example and create an object
-## prepare the table, geneNames, geneLengths, sizeFactors, dispersion estiamtion and variance estimation 
+## import example and create an object containing data table, geneNames, geneLengths, sizeFactors, dispersion estiamtion and variance estimation 
 dataDir = "data/"
 load(file = paste0(dataDir, "fitting_degradation_all_data_example_readCount_rpkm.Rdata"))
 
@@ -63,17 +62,12 @@ if(TEST.readCount.NB){
   
 }
 
-####################
-## parameter required to specify
-####################
-outliers.removal = TRUE;
-debug = TRUE;
+## Specify required parameter for the main function and test 
+outliers.removal = TRUE
+debug = TRUE
 identifiablity.analysis.gamma = TRUE
-
 gg = "Per3"
 gene.index = which(T$gene==gg)
-
-## test the current functions 
 
 ptm <- proc.time()
 res.fit = make.fits.with.all.models.for.one.gene.remove.outliers(mds, gene.index = gene.index, debug = debug,
