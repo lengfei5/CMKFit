@@ -1,0 +1,33 @@
+Package: CKMFit
+Type: Package
+Title: Circadian mRNA Kinetic Model Fit
+Version: 1.0
+Author: Jingkui Wang
+Maintainer: Jingkui Wang <lengfei5@gmail.com>
+Description: This R package is fitting circadian (temproal) profiles of pre-mRNA and mRNA with a kineticc model,
+    dissecting the contributions of rhythmic transcription and mRNA degradation 
+    and finally inferring mRNA kineitc parameters, e.g. half-life, rhythmic amplitude and phase of rhythmic degradation.
+Depends:
+    R (>= 3.15)
+Imports:
+    DESeq2,
+    limma,
+    emdbook,
+    deSolve,
+    fdrtool,
+    circular, 
+    preprocessCore, 
+    gtools, 
+    biomaRt, 
+    numDeriv, 
+    Matrix,
+    graphics,
+    stats,
+    utils
+Suggests:
+    devtools,
+    roxygen2,
+    testthat
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
