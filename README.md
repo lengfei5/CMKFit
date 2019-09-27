@@ -70,19 +70,19 @@ proc.time() - ptm
   that they can be easily to be adapted to do it. 
   And also keep in mind that JW has done it, at least partially, 
   in the inital effort (in the folder`origin/`).   
-  - [x] The empirical Bayes for the variance in gaussian noise have been implemented in limma pacakge for microarray; however, it can not be  
+- [x] The empirical Bayes for the variance in gaussian noise have been implemented in limma pacakge for microarray; however, it can not be  
     directly borrowed, because the limma estimate first the gene-wide variance by fitting a GLM, which is applicable in our case. 
     we need to understand how it works in some detailed steps and to ajust it for our case.
-  - [x] In the limma package, two main papers were done for the variance estiamtion with EB shrinkage  
+- [x] In the limma package, two main papers were done for the variance estiamtion with EB shrinkage  
     Smyth (2004) and Phipson et al. (2016), the latter addes a robust option to deal with outliers;  
     And "limma-trend" option was also added, which is relevant to our case and   
     integrated the idea from the paper Sartor et al. BMC (2006) which proposed the intensity-based EB method for variance estimation
     
-  - [x] Gaussian mode is implemented in the parameter optimizaiotn function
-  - [x] Implement Gaussian mode for outlier detection
-  - [x] Implement Gaussian mdoe for identifiability analysis; Some inspiration could come from the bbmle package in which a profile-likelihood was   
+- [x] Gaussian mode is implemented in the parameter optimizaiotn function
+- [x] Implement Gaussian mode for outlier detection
+- [x] Implement Gaussian mdoe for identifiability analysis; Some inspiration could come from the bbmle package in which a profile-likelihood was   
         implemented. 
-        (Give up) consider to use bbmle package in R instead of optim, or at least for profile-likelihood, which could be much faster and more convenient to use. 
+        
 
 ## TO-Do list
 - [ ] Now the code is designed just for fitting one gene. 
